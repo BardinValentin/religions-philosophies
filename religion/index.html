@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Развитие религий и философий</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div id="sidebar">
+    <div id="sidebar-header">
+      <h1>Развитие религий и философий</h1>
+      <span class="subtitle">Авраамические · Дхармические · Восточноазиатские</span>
+    </div>
+
+    <div id="view-toggle">
+      <button id="btn-tree-view" class="view-btn active">🌳 Древо</button>
+      <button id="btn-parallels-view" class="view-btn">🔗 Параллели</button>
+      <button id="btn-hierarchy-view" class="view-btn">🏛 Философия творения
+      <button id="btn-map-view" class="view-btn">🗺 Карта</button>
+    </div>
+
+    <nav id="nav-tree">
+      <button class="nav-btn level-1" data-node="abrahamic" data-scale="fit">⊙ Обзор</button>
+
+      <details>
+        <summary class="nav-btn level-1" data-node="ancient_roots"><span class="arrow">▶</span> Древние корни</summary>
+        <button class="nav-btn level-2" data-node="mesopotamian">Шумеро-аккадская</button>
+        <button class="nav-btn level-2" data-node="egyptian">Египетская</button>
+        <button class="nav-btn level-2" data-node="canaanite">Ханаанская</button>
+        <button class="nav-btn level-2" data-node="zoroastrian">Зороастризм</button>
+        <button class="nav-btn level-2" data-node="hellenistic">Эллинизм</button>
+        <button class="nav-btn level-2" data-node="roman_pagan">Римская</button>
+        <button class="nav-btn level-2" data-node="norse">Скандинавская</button>
+        <button class="nav-btn level-2" data-node="slavic_pagan">Славянская</button>
+        <button class="nav-btn level-2" data-node="pre_islamic_arabia">Доисламская Аравия</button>
+        <button class="nav-btn level-2" data-node="celtic_pagan">Кельтская</button>
+        <button class="nav-btn level-2" data-node="baltic_pagan">Балтская</button>
+        <button class="nav-btn level-2" data-node="finno_ugric">Финно-угорская</button>
+        <button class="nav-btn level-2" data-node="tengrism">Тенгрианство</button>
+        <button class="nav-btn level-2" data-node="african_trad">Афр. традиционные</button>
+        <button class="nav-btn level-2" data-node="polynesian">Полинезийская</button>
+        <button class="nav-btn level-2" data-node="native_american">Религии Америки</button>
+        <button class="nav-btn level-2" data-node="vedic">Ведическая</button>
+        <button class="nav-btn level-2" data-node="abraham">Авраам</button>
+      </details>
+
+      <details>
+        <summary class="nav-btn level-1" data-node="christianity"><span class="arrow">▶</span> Христианство</summary>
+
+        <details>
+          <summary class="nav-btn level-2" data-node="catholicism"><span class="arrow">▶</span> Католицизм</summary>
+          <button class="nav-btn level-3" data-node="roman_catholic">Римско-католическая</button>
+          <button class="nav-btn level-3" data-node="eastern_catholic">Восточно-католическая</button>
+        </details>
+
+        <details>
+          <summary class="nav-btn level-2" data-node="orthodoxy"><span class="arrow">▶</span> Православие</summary>
+          <button class="nav-btn level-3" data-node="eastern_orthodox">Восточное православие</button>
+          <button class="nav-btn level-3" data-node="oriental_orthodox">Ориентальное православие</button>
+        </details>
+
+        <details>
+          <summary class="nav-btn level-2" data-node="protestantism"><span class="arrow">▶</span> Протестантизм</summary>
+          <button class="nav-btn level-3" data-node="lutheranism">Лютеранство</button>
+          <button class="nav-btn level-3" data-node="anglicanism">Англиканство</button>
+          <button class="nav-btn level-3" data-node="calvinism">Кальвинизм</button>
+          <button class="nav-btn level-3" data-node="baptist">Баптизм</button>
+          <button class="nav-btn level-3" data-node="methodism">Методизм</button>
+          <button class="nav-btn level-3" data-node="pentecostalism">Пятидесятничество</button>
+        </details>
+
+        <details>
+          <summary class="nav-btn level-2" data-node="christianity_beliefs"><span class="arrow">▶</span> Верования</summary>
+          <button class="nav-btn level-3" data-node="nicean_creed">Никейский символ</button>
+          <button class="nav-btn level-3" data-node="chalcedon_creed">Халкидонский орос</button>
+        </details>
+        <details>
+          <summary class="nav-btn level-2" data-node="christianity_texts"><span class="arrow">▶</span> Тексты</summary>
+          <button class="nav-btn level-3" data-node="ecumenical_councils">Деяния соборов</button>
+          <button class="nav-btn level-3" data-node="church_fathers">Святые отцы</button>
+          <button class="nav-btn level-3" data-node="patristics">Патристика</button>
+        </details>
+        <button class="nav-btn level-2" data-node="christianity_rules">Правила</button>
+        <details>
+          <summary class="nav-btn level-2" data-node="christianity_practices"><span class="arrow">▶</span> Таинства</summary>
+          <button class="nav-btn level-3" data-node="liturgy_byzantine">Византийская литургия</button>
+          <button class="nav-btn level-3" data-node="liturgy_roman">Римская месса</button>
+          <button class="nav-btn level-3" data-node="monasticism">Монашество</button>
+          <button class="nav-btn level-3" data-node="hesychasm">Исихазм</button>
+        </details>
+        <details>
+          <summary class="nav-btn level-2" data-node="marginal_branch"><span class="arrow">▶</span> Непризнанные</summary>
+          <button class="nav-btn level-3" data-node="mormonism">Мормонизм</button>
+          <button class="nav-btn level-3" data-node="jehovah_witnesses">Свидетели Иеговы</button>
+          <button class="nav-btn level-3" data-node="unitarianism">Унитарианство</button>
+        </details>
+
+        <details>
+          <summary class="nav-btn level-2" data-node="christianity_apocrypha"><span class="arrow">▶</span> Апокрифы</summary>
+          <details>
+            <summary class="nav-btn level-3" data-node="apocrypha_ot"><span class="arrow">▶</span> Ветхозаветные</summary>
+            <button class="nav-btn level-4" data-node="enoch">Книга Еноха</button>
+            <button class="nav-btn level-4" data-node="jubilees">Книга Юбилеев</button>
+          </details>
+          <details>
+            <summary class="nav-btn level-3" data-node="apocrypha_nt"><span class="arrow">▶</span> Новозаветные</summary>
+            <button class="nav-btn level-4" data-node="gospel_thomas">Евангелие от Фомы</button>
+            <button class="nav-btn level-4" data-node="gospel_judas">Евангелие от Иуды</button>
+            <button class="nav-btn level-4" data-node="gospel_mary">Евангелие от Марии</button>
+          </details>
+        </details>
+      </details>
+
+      <details>
+        <summary class="nav-btn level-1" data-node="judaism"><span class="arrow">▶</span> Иудаизм</summary>
+        <button class="nav-btn level-2" data-node="orthodox_judaism">Ортодоксальный</button>
+        <button class="nav-btn level-2" data-node="conservative_judaism">Консервативный</button>
+        <button class="nav-btn level-2" data-node="reform_judaism">Реформистский</button>
+        <button class="nav-btn level-2" data-node="hasidism">Хасидизм</button>
+        <details>
+          <summary class="nav-btn level-2" data-node="kabbalah"><span class="arrow">▶</span> Каббала</summary>
+          <button class="nav-btn level-3" data-node="zohar">Зоар</button>
+          <button class="nav-btn level-3" data-node="sefer_yetzirah">Сефер Йецира</button>
+        </details>
+        <button class="nav-btn level-2" data-node="judaism_beliefs">Верования</button>
+        <button class="nav-btn level-2" data-node="jewish_philosophy">Еврейская философия</button>
+        <button class="nav-btn level-2" data-node="maimonides">Маймонид</button>
+        <button class="nav-btn level-2" data-node="judaism_texts">Тексты</button>
+        <button class="nav-btn level-2" data-node="judaism_rules">Правила</button>
+        <button class="nav-btn level-2" data-node="judaism_practices">Практики</button>
+      </details>
+
+      <details>
+        <summary class="nav-btn level-1" data-node="islam"><span class="arrow">▶</span> Ислам</summary>
+        <details>
+          <summary class="nav-btn level-2" data-node="sunni"><span class="arrow">▶</span> Суннизм</summary>
+          <button class="nav-btn level-3" data-node="fiqh_schools">Школы фикха</button>
+          <button class="nav-btn level-3" data-node="hanafi">Ханафитский</button>
+          <button class="nav-btn level-3" data-node="maliki">Маликитский</button>
+          <button class="nav-btn level-3" data-node="shafi_i">Шафиитский</button>
+          <button class="nav-btn level-3" data-node="hanbali">Ханбалитский</button>
+        </details>
+        <button class="nav-btn level-2" data-node="shia">Шиизм</button>
+        <details>
+          <summary class="nav-btn level-2" data-node="sufism"><span class="arrow">▶</span> Суфизм</summary>
+          <button class="nav-btn level-3" data-node="sufi_tariqas">Тарикаты</button>
+          <button class="nav-btn level-3" data-node="qadiriyya">Кадирия</button>
+          <button class="nav-btn level-3" data-node="naqshbandiyya">Накшбандия</button>
+          <button class="nav-btn level-3" data-node="suhrawardiyya">Сухравардия</button>
+          <button class="nav-btn level-3" data-node="kalam">Калам (теология)</button>
+          <button class="nav-btn level-3" data-node="falsafa">Фальсафа (философия)</button>
+        </details>
+        <button class="nav-btn level-2" data-node="islam_beliefs">Верования</button>
+        <button class="nav-btn level-2" data-node="islam_texts">Тексты</button>
+        <button class="nav-btn level-2" data-node="islam_rules">Столпы</button>
+      </details>
+
+      <details>
+        <summary class="nav-btn level-1" data-node="dharmic"><span class="arrow">▶</span> Индуизм</summary>
+        <details>
+          <summary class="nav-btn level-2" style="cursor:default"><span class="arrow">▶</span> Школы и направления</summary>
+          <details>
+            <summary class="nav-btn level-3" data-node="vaishnavism"><span class="arrow">▶</span> Вайшнавизм</summary>
+            <button class="nav-btn level-4" data-node="bhakti">Бхакти (преданность)</button>
+            <button class="nav-btn level-4" data-node="vishishtadvaita">Вишиштадвайта</button>
+            <button class="nav-btn level-4" data-node="dvaita">Двайта</button>
+          </details>
+          <details>
+            <summary class="nav-btn level-3" data-node="shaivism"><span class="arrow">▶</span> Шиваизм</summary>
+            <button class="nav-btn level-4" data-node="meditation_hindu">Медитация</button>
+          </details>
+          <button class="nav-btn level-3" data-node="shaktism">Шактизм</button>
+          <details>
+            <summary class="nav-btn level-3" data-node="smartism"><span class="arrow">▶</span> Смартизм</summary>
+            <button class="nav-btn level-4" data-node="advaita_vedanta">Адвайта-веданта</button>
+          </details>
+          <button class="nav-btn level-3" data-node="samkhya">Санкхья</button>
+          <button class="nav-btn level-3" data-node="nyaya">Ньяя (логика)</button>
+          <button class="nav-btn level-3" data-node="vaisheshika">Вайшешика (атомизм)</button>
+          <details>
+            <summary class="nav-btn level-3" data-node="hinduism_modern"><span class="arrow">▶</span> Современные движения</summary>
+            <button class="nav-btn level-4" data-node="brahmo_samaj">Брахмо-самадж</button>
+            <button class="nav-btn level-4" data-node="arya_samaj">Арья-самадж</button>
+            <button class="nav-btn level-4" data-node="ramakrishna_mission">Рамакришна Миссия</button>
+            <button class="nav-btn level-4" data-node="ananda_marga">Ананда Марга</button>
+            <button class="nav-btn level-4" data-node="iskcon">ИСККОН</button>
+            <button class="nav-btn level-4" data-node="osho">Ошо</button>
+          </details>
+        </details>
+        <button class="nav-btn level-2" data-node="hinduism_beliefs">Верования</button>
+        <details>
+          <summary class="nav-btn level-2" data-node="hinduism_texts"><span class="arrow">▶</span> Тексты</summary>
+          <details>
+            <summary class="nav-btn level-3" data-node="vedas"><span class="arrow">▶</span> Веды</summary>
+            <button class="nav-btn level-4" data-node="rigveda">Ригведа</button>
+            <button class="nav-btn level-4" data-node="samaveda">Самаведа</button>
+            <button class="nav-btn level-4" data-node="yajurveda">Яджурведа</button>
+            <button class="nav-btn level-4" data-node="atharvaveda">Атхарваведа</button>
+          </details>
+          <button class="nav-btn level-3" data-node="upanishads">Упанишады</button>
+          <button class="nav-btn level-3" data-node="bhagavad_gita">Бхагавад-гита</button>
+          <button class="nav-btn level-3" data-node="puranas">Пураны</button>
+          <details>
+            <summary class="nav-btn level-3" data-node="itihasas"><span class="arrow">▶</span> Итихасы (эпосы)</summary>
+            <button class="nav-btn level-4" data-node="ramayana">Рамаяна</button>
+            <button class="nav-btn level-4" data-node="mahabharata">Махабхарата</button>
+          </details>
+        </details>
+        <button class="nav-btn level-2" data-node="hinduism_rules">Правила</button>
+        <button class="nav-btn level-2" data-node="hinduism_practices">Практики</button>
+      </details>
+
+      <details>
+        <summary class="nav-btn level-1" data-node="buddhism"><span class="arrow">▶</span> Буддизм</summary>
+        <details>
+          <summary class="nav-btn level-2" data-node="buddhism_schools"><span class="arrow">▶</span> Школы</summary>
+          <button class="nav-btn level-3" data-node="theravada">Тхеравада</button>
+          <button class="nav-btn level-3" data-node="mahayana">Махаяна</button>
+          <button class="nav-btn level-3" data-node="vajrayana">Ваджраяна</button>
+          <button class="nav-btn level-3" data-node="pure_land">Чистая Земля</button>
+        </details>
+        <details>
+          <summary class="nav-btn level-2" data-node="buddhism_beliefs"><span class="arrow">▶</span> Верования</summary>
+          <button class="nav-btn level-3" data-node="madhyamaka">Мадхьямака</button>
+          <button class="nav-btn level-3" data-node="yogacara">Йогачара</button>
+          <button class="nav-btn level-3" data-node="dzogchen">Дзогчен</button>
+        </details>
+        <details>
+          <summary class="nav-btn level-2" data-node="buddhism_texts"><span class="arrow">▶</span> Тексты</summary>
+          <button class="nav-btn level-3" data-node="tripitaka">Трипитака</button>
+          <button class="nav-btn level-3" data-node="buddhist_sutras">Сутры Махаяны</button>
+          <button class="nav-btn level-3" data-node="dhammapada">Дхаммапада</button>
+        </details>
+        <details>
+          <summary class="nav-btn level-2" data-node="buddhism_practices"><span class="arrow">▶</span> Практики</summary>
+          <button class="nav-btn level-3" data-node="buddhist_tantra">Буддийский тантризм</button>
+        </details>
+      </details>
+
+      <details>
+        <summary class="nav-btn level-1" data-node="jainism"><span class="arrow">▶</span> Джайнизм</summary>
+        <details>
+          <summary class="nav-btn level-2" data-node="jainism_schools"><span class="arrow">▶</span> Школы</summary>
+          <button class="nav-btn level-3" data-node="digambara">Дигамбары</button>
+          <button class="nav-btn level-3" data-node="shvetambara">Шветамбары</button>
+        </details>
+        <button class="nav-btn level-2" data-node="jainism_beliefs">Верования</button>
+        <details>
+          <summary class="nav-btn level-2" data-node="jainism_texts"><span class="arrow">▶</span> Тексты</summary>
+          <button class="nav-btn level-3" data-node="agamas">Агамы</button>
+          <button class="nav-btn level-3" data-node="tattvartha_sutra">Таттвартха-сутра</button>
+        </details>
+        <button class="nav-btn level-2" data-node="jainism_rules">Правила</button>
+        <button class="nav-btn level-2" data-node="jainism_practices">Практики</button>
+      </details>
+
+      <details>
+        <summary class="nav-btn level-1" data-node="sikhism"><span class="arrow">▶</span> Сикхизм</summary>
+        <button class="nav-btn level-2" data-node="sikhism_beliefs">Верования</button>
+        <details>
+          <summary class="nav-btn level-2" data-node="sikhism_texts"><span class="arrow">▶</span> Тексты</summary>
+          <button class="nav-btn level-3" data-node="guru_granth_sahib">Гуру Грантх Сахиб</button>
+        </details>
+        <button class="nav-btn level-2" data-node="sikhism_rules">Правила</button>
+        <button class="nav-btn level-2" data-node="sikhism_practices">Практики</button>
+      </details>
+
+      <details>
+        <summary class="nav-btn level-1" data-node="east_asian"><span class="arrow">▶</span> Восточноазиатские учения</summary>
+        <details>
+          <summary class="nav-btn level-2" data-node="taoism"><span class="arrow">▶</span> Даосизм</summary>
+          <button class="nav-btn level-3" data-node="taoism_beliefs">Верования</button>
+          <button class="nav-btn level-3" data-node="taoism_texts">Тексты</button>
+          <button class="nav-btn level-3" data-node="taoism_practices">Практики</button>
+        </details>
+        <details>
+          <summary class="nav-btn level-2" data-node="confucianism"><span class="arrow">▶</span> Конфуцианство</summary>
+          <button class="nav-btn level-3" data-node="confucianism_beliefs">Верования</button>
+          <button class="nav-btn level-3" data-node="confucianism_texts">Тексты</button>
+          <button class="nav-btn level-3" data-node="confucianism_practices">Практики</button>
+        </details>
+        <details>
+          <summary class="nav-btn level-2" data-node="shinto"><span class="arrow">▶</span> Синтоизм</summary>
+          <button class="nav-btn level-3" data-node="shinto_beliefs">Верования</button>
+          <button class="nav-btn level-3" data-node="shinto_texts">Тексты</button>
+          <button class="nav-btn level-3" data-node="shinto_practices">Практики</button>
+        </details>
+      </details>
+
+      <details>
+        <summary class="nav-btn level-1" data-node="modern_movements"><span class="arrow">▶</span> Современные движения</summary>
+        <details>
+          <summary class="nav-btn level-2" data-node="theosophy"><span class="arrow">▶</span> Теософия</summary>
+          <button class="nav-btn level-3" data-node="secret_doctrine">Тайная Доктрина</button>
+        </details>
+        <details>
+          <summary class="nav-btn level-2" data-node="agni_yoga"><span class="arrow">▶</span> Агни-йога</summary>
+          <button class="nav-btn level-3" data-node="agni_yoga_books">Книги Агни-йоги</button>
+        </details>
+        <details>
+          <summary class="nav-btn level-2" data-node="integral_yoga"><span class="arrow">▶</span> Интегральная йога</summary>
+          <button class="nav-btn level-3" data-node="the_life_divine">Божественная жизнь</button>
+        </details>
+        <button class="nav-btn level-2" data-node="anthroposophy">Антропософия</button>
+        <button class="nav-btn level-2" data-node="new_age">Нью-эйдж</button>
+        <button class="nav-btn level-2" data-node="bahai">Бахаи</button>
+        <button class="nav-btn level-2" data-node="wicca">Викка</button>
+        <button class="nav-btn level-2" data-node="rastafari">Растафари</button>
+        <button class="nav-btn level-2" data-node="candomble">Кандомбле</button>
+        <button class="nav-btn level-2" data-node="umbanda">Умбанда</button>
+        <button class="nav-btn level-2" data-node="falun_gong">Фалуньгун</button>
+        <button class="nav-btn level-2" data-node="anastasia">Анастасия</button>
+        <button class="nav-btn level-2" data-node="modern_beliefs">Верования</button>
+        <button class="nav-btn level-2" data-node="modern_texts">Тексты</button>
+        <button class="nav-btn level-2" data-node="modern_practices">Практики</button>
+      </details>
+
+      <details>
+        <summary class="nav-btn level-1" data-node="egregor"><span class="arrow">▶</span> Эгрегор</summary>
+        <button class="nav-btn level-2" data-node="egregor_theory">Теория эгрегоров</button>
+        <button class="nav-btn level-2" data-node="egregor_types">Типы эгрегоров</button>
+        <button class="nav-btn level-2" data-node="egregor_texts">Тексты</button>
+        <button class="nav-btn level-2" data-node="egregor_practices">Практики</button>
+      </details>
+    </nav>
+
+    <div id="legend">
+      <div class="legend-item"><span class="legend-dot" style="background:#b8a07a"></span>Корень</div>
+      <div class="legend-item"><span class="legend-dot" style="background:#a8987a"></span>Ветвь</div>
+      <div class="legend-item"><span class="legend-dot" style="background:#c48a7a"></span>Верование</div>
+      <div class="legend-item"><span class="legend-dot" style="background:#7a9aba"></span>Текст</div>
+      <div class="legend-item"><span class="legend-dot" style="background:#8ab888"></span>Правило</div>
+      <div class="legend-item"><span class="legend-dot" style="background:#9a8abc"></span>Практика</div>
+      <div class="legend-item"><span class="legend-dot" style="background:#887a8a"></span>Маргинальные</div>
+      <div class="legend-item"><span class="legend-dot" style="background:#6a8a7a"></span>Апокриф</div>
+    </div>
+  </div>
+
+  <div id="content">
+  <div id="container"></div>
+
+  <div id="parallels-container">
+    <div id="parallels-network"></div>
+    <div id="parallels-legend">
+      <div class="p-item"><span class="p-dot" style="background:#d4a050"></span>Громовержцы <span class="p-hint">боги грома и небесной власти</span></div>
+      <div class="p-item"><span class="p-dot" style="background:#6ab86a"></span>Умирающие и воскресающие <span class="p-hint">смерть и возрождение природы</span></div>
+      <div class="p-item"><span class="p-dot" style="background:#d480a0"></span>Богини-матери <span class="p-hint">земля, плодородие, материнство</span></div>
+      <div class="p-item"><span class="p-dot" style="background:#d09040"></span>Трикстеры <span class="p-hint">обманщики, нарушители порядка, посредники</span></div>
+      <div class="p-item"><span class="p-dot" style="background:#d4c040"></span>Солярные божества <span class="p-hint">боги и богини солнца</span></div>
+      <div class="p-item"><span class="p-dot" style="background:#a080d0"></span>Шаманские практики <span class="p-hint">камлание, трансовые техники, духи</span></div>
+      <div class="p-item"><span class="p-dot" style="background:#5090c0"></span>Водные божества <span class="p-hint">моря, реки, океаны, космические воды</span></div>
+      <div class="p-item"><span class="p-dot" style="background:#888888"></span>Подземный мир <span class="p-hint">царство мёртвых, хтонические божества</span></div>
+    </div>
+  </div>
+
+  <div id="hierarchies-container">
+    <div class="h-tabs">
+      <button class="h-tab active" data-htree="dharmic">Дхармическая</button>
+      <button class="h-tab" data-htree="abrahamic">Авраамическое</button>
+      <button class="h-tab" data-htree="east_asian">Восточная Азия</button>
+      <button class="h-tab" data-htree="modern">Современные движения</button>
+    </div>
+    <button id="h-source-btn" title="Об источниках">?</button>
+    <div id="h-source-popup">
+      <div class="h-source-section">
+        <strong>Родословная вселенной</strong> — космогония на основе <em>Ригведы</em> (10.129, 10.121), <em>Вишну-пураны, Бхагавата-пураны</em> и <em>Махабхараты</em> (кн.12). Принимается школами <strong>адвайта-веданты</strong> (Шанкара), <strong>вишиштадвайты</strong> (Рамануджа) и <strong>смартизмом</strong>.
+      </div>
+      <div class="h-source-section">
+        <strong>Тримурти и Даттатрея</strong> — триединство Брахмы-Вишну-Шивы как проявление единого Абсолюта. В отличие от «родословной» (где мир разворачивается из Парабрахмана через Хираньягарбху в Брахму-творца), Тримурти описывает <strong>одновременное</strong> функционирование божественных сил: творение (Брахма), сохранение (Вишну), разрушение (Шива). Источники: <em>Матсья-пурана, Курма-пурана</em>; <em>Авадхута-гита</em> (Дататтрея).
+      </div>
+      <div class="h-source-section" style="color:rgba(255,255,255,0.4);font-size:10px">
+        Подробнее: А.Ч. Бхактиведанта «Источник вечного наслаждения»; В.Г. Эрман «Очерк истории ведийской литературы»; С.В. Пахомов «Индуизм: философия и практика»; Р.Н. Дандекар «От Вед к индуизму».
+      </div>
+      <div class="h-source-section">
+        <strong>Джайнизм</strong> — космология анади-сансары (безначальной вселенной), три мира (урдхва-лока, мадхья-лока, адхо-лока), 24 тиртханкары, освобождение (мокша) через три жемчужины: правильное воззрение, правильное знание, правильное поведение. Источники: <em>Таттвартха-сутра</em> Умасвати, <em>Ачаранга-сутра</em>.
+      </div>
+      <div class="h-source-section" style="color:rgba(255,255,255,0.4);font-size:10px">
+        Подробнее: Н.А. Железнова «Учение Кундакунды в философско-религиозной традиции джайнизма»; P.S. Jaini «The Jaina Path of Purification»; «Джайнизм: философия, логика, этика» (ред. В.К. Шохин); <em>Таттвартха-сутра</em> (пер. Н.А. Железновой).
+      </div>
+      <div class="h-source-section">
+        <strong>Сикхизм</strong> — философия Эк-Онкар (Единый Бог), Хукам (Божественный закон), 10 гуру, священный текст «Гуру Грантх Сахиб» (Ади Грантх), путь освобождения через нам джапо (повторение Имени), кират каро (честный труд), ванд чхакно (делиться с другими), вступление в Хальсу. Источники: <em>Гуру Грантх Сахиб</em>; «Джапджи Сахиб» (Гуру Нанак).
+      </div>
+      <div class="h-source-section" style="color:rgba(255,255,255,0.4);font-size:10px">
+        Подробнее: W.H. McLeod «Guru Nanak and the Sikh Religion»; Е.Б. Рашковский «Сикхизм»; J.S. Grewal «The Sikhs of the Punjab»; <em>Гуру Грантх Сахиб</em> (англ. пер. G.S. Mann).
+      </div>
+      <div class="h-source-section">
+        <strong>Ананда Марга</strong> — космология творения П.Р. Саркара (Шри Шри Анандамурти). Из Парамашивы (Ниргуна Брахма — Абсолют без атрибутов) через единство Шивы (сознание) и Шакти (энергия) проявляется <strong>Сагуна Брахма</strong> — Брахма с атрибутами, творческий аспект. Сагуна Брахма создаёт Махаттаттву (космическое эго), затем Ахамкару (индивидуальное эго), и далее — 25 таттв (принципов): буддхи, манас, 5 танматр, 5 махабхут, 3 гуны и др. Завершается цикл возвращением (пратисанчара) дживы к Парамашиве через мокшу. Источники: <em>Ананда Сутрам</em> Шри Шри Анандамурти; «Discourses on Prout»; «Idea and Ideology» П.Р. Саркара.
+      </div>
+      <div class="h-source-section" style="color:rgba(255,255,255,0.4);font-size:10px">
+        Подробнее: Шри Шри Анандамурти «Ананда Сутрам» (пер. с англ.); А.Ч. Бхактиведанта «Источник вечного наслаждения» (сравнит. космология); R. Sarkar «The Supreme Expression».
+      </div>
+      <div class="h-source-section">
+        <strong>Теософия</strong> — космология Е.П. Блаватской: Единый Абсолют (Парабрахман) → Три Логоса → Семь планов бытия (Ади, Анупадака, Нирвана, Буддхи, Ментал, Астрал, Физика) → Монада (искра Божественного) → триада Атма-Буддхи-Манас → человек → эволюция через семь коренных рас → освобождение. Источники: «Тайная Доктрина»; «Разоблачённая Изида»; «Письма Махатм».
+      </div>
+      <div class="h-source-section" style="color:rgba(255,255,255,0.4);font-size:10px">
+        Подробнее: Е.П. Блаватская «Тайная Доктрина» (тт.1-2); А. Безант «Древняя мудрость»; Ч. Ледбитер «Монада»; C.W. Leadbeater «The Chakras»; «Письма Махатм» (пер. с англ.).
+      </div>
+      <div class="h-source-section">
+        <strong>Агни-йога (Живая Этика)</strong> — философия Н.К. и Е.И. Рерихов: Абсолют (Огненный Творец) → Закон Космического Магнита → Пространственный Огонь (первичная субстанция) → психическая энергия → человек (микрокосм) → эволюция огня → слияние с Высшим. Миры: Тонкий (ментальный), Астральный, Физический. Источники: «Агни-йога» (серия книг); «Мир Огненный»; «Беспредельность»; «Надземное».
+      </div>
+      <div class="h-source-section" style="color:rgba(255,255,255,0.4);font-size:10px">
+        Подробнее: Е.И. Рерих «Учение Живой Этики» (собрание); Н.К. Рерих «Сердце Азии»; Л.В. Шапошникова «Космическое мировоззрение — новое мышление XXI века».
+      </div>
+      <div class="h-source-section">
+        <strong>Интегральная йога (Шри Ауробиндо)</strong> — философия эволюции сознания: Брахман (Непроявленное) → Сат-Чит-Ананда (Сознание-Истина-Блаженство) → Супраментал (Сверхразум) → Овермайнд → Ментал → Витал → Физика. Инволюция (нисхождение Сверхразума в материю) → эволюция (восхождение духа через формы) → супраментальное преображение → Божественная жизнь на земле (Гносис). Источники: «Жизнь Божественная»; «Синтез йоги»; «Эссе о Гите»; «Час Господа».
+      </div>
+      <div class="h-source-section" style="color:rgba(255,255,255,0.4);font-size:10px">
+        Подробнее: Шри Ауробиндо «Жизнь Божественная» (пер. с англ.); Шри Ауробиндо «Синтез йоги»; Мать (Мирра Альфасса) «Вопросы и ответы»; S.K. Maitra «The Meeting of the East and the West in Sri Aurobindo's Philosophy».
+      </div>
+      <div class="h-source-section">
+        <strong>Каббала (Древо Жизни)</strong> — 10 сфирот (божественных эманаций) как структура творения: от Эйн Соф (Бесконечного) через три верхних сфиры (Кетер, Хохма, Бина) к семи нижним (Хесед—Малхут). Средняя колонна (Кетер—Тиферет—Йесод—Малхут) — столп равновесия. Источники: «Сефер Йецира»; «Зогар»; «Книга Бахир»; Моше Хаим Луцатто «Путь Творца»; Арье Каплан «Сефер Йецира».
+      </div>
+      <div class="h-source-section" style="color:rgba(255,255,255,0.4);font-size:10px">
+        Подробнее: А. Каплан «Медитация и Каббала»; Г. Шолем «Основные течения в еврейской мистике»; М. Бубер «Хасидские предания»; «Зогар» (пер. М. Кравцова); D. Matt «The Essential Kabbalah».
+      </div>
+      <div class="h-source-section">
+        <strong>Исламская космология</strong> — семь небес (Самават) над землёй, Престол Бога (Курси) и Его Трон (Арш) над ними. Мирадж пророка Мухаммада — восхождение через небеса (Коран 17:1; 53:1-18). Небесная Скрижаль (Лаух аль-Махфуз) и Перо (Калям) — запись судеб. Источники: Коран (суры 2, 7, 15, 21, 41, 67, 69, 96); хадисы о Мирадже (Сахих аль-Бухари, Сахих Муслим); «Калям» — первое творение (Ибн Араби «Геммы мудрости»).
+      </div>
+      <div class="h-source-section" style="color:rgba(255,255,255,0.4);font-size:10px">
+        Подробнее: Коран (пер. И.Ю. Крачковского); аль-Газали «Воскрешение наук о вере»; Ибн Араби «Мекканские откровения»; W.C. Chittick «The Sufi Path of Knowledge»; С. Абу Саид «Космология Корана».
+      </div>
+      <div class="h-source-section">
+        <strong>Даосская космология</strong> — Дао (Путь) → Дэ (Сила) → Уцзи (Небытие) → Тайцзи (Великий Предел) → Инь-Ян → 5 элементов (У-Син) → тьма вещей. Взаимодействие Инь и Ян порождает энергию Ци, пронизывающую всё. Источники: «Дао-Дэ-Цзин» Лао-Цзы; «Чжуан-Цзы»; «И-Цзин» (Канон Перемен); Хэшан-гун «Комментарий к Дао-Дэ-Цзин».
+      </div>
+      <div class="h-source-section" style="color:rgba(255,255,255,0.4);font-size:10px">
+        Подробнее: Лао-Цзы «Дао-Дэ-Цзин» (пер. Ян Хин-шуна); А.Е. Лукьянов «Дао: книга перемен»; Е.А. Торчинов «Даосизм»; Чжуан-Цзы (пер. В.В. Малявина); I. Robinet «Taoism: Growth of a Religion».
+      </div>
+      <div class="h-source-section">
+        <strong>Конфуцианская космология</strong> — Небо (Тянь) как моральный источник → Великий Предел (Тайцзи) → Инь-Ян → Пять Элементов → система добродетелей (Жэнь, И, Ли, Чжи, Синь) → Пять связей (У-Лунь) → благородный муж (Цзюнь-цзы). Чжоу Дуньи «Объяснение диаграммы Великого Предела» (XI в.). Источники: Чжоу Дуньи «Тайцзи-ту-шо»; «Лунь-юй» Конфуция; «Чжун-Юн»; «И-Цзин» (Сицы-чжуань); Чжу Си «Комментарий к Тайцзи».
+      </div>
+      <div class="h-source-section" style="color:rgba(255,255,255,0.4);font-size:10px">
+        Подробнее: Конфуций «Лунь-юй» (пер. Л.Д. Позднеевой); Чжу Си «Собрание сочинений»; В.М. Алексеев «Китайская литература»; А.С. Мартынов «Конфуцианство: классический период»; W.T. Chan «A Source Book in Chinese Philosophy».
+      </div>
+    </div>
+    <div class="h-subtabs" data-htree="dharmic">
+      <button class="h-subtab active" data-hsub="genealogy">Ригведа</button>
+      <button class="h-subtab" data-hsub="trimurti">Тримурти</button>
+      <button class="h-subtab" data-hsub="jainism">Джайнизм</button>
+      <button class="h-subtab" data-hsub="sikhism">Сикхизм</button>
+    </div>
+    <div class="h-subtabs" data-htree="abrahamic" style="display:none">
+      <button class="h-subtab active" data-hsub="genealogy">Библейское</button>
+      <button class="h-subtab" data-hsub="kabbalah">Каббала</button>
+      <button class="h-subtab" data-hsub="islamic_cosmos">Исламская</button>
+    </div>
+    <div class="h-subtabs" data-htree="east_asian" style="display:none">
+      <button class="h-subtab active" data-hsub="taoist">Даосская</button>
+      <button class="h-subtab" data-hsub="confucian">Конфуцианская</button>
+    </div>
+    <div class="h-subtabs" data-htree="modern" style="display:none">
+      <button class="h-subtab active" data-hsub="theosophy">Теософия</button>
+      <button class="h-subtab" data-hsub="agni_yoga">Агни-йога</button>
+      <button class="h-subtab" data-hsub="integral_yoga">Интегральная йога</button>
+      <button class="h-subtab" data-hsub="ananda_marga">Ананда Марга</button>
+      <button class="h-subtab" data-hsub="anthroposophy">Антропософия</button>
+      <button class="h-subtab" data-hsub="hermeticism">Герметизм</button>
+      <button class="h-subtab" data-hsub="gnosticism">Гностицизм</button>
+    </div>
+    <div id="hierarchies-dharmic-single">
+      <div id="hierarchies-network"></div>
+      <div id="hierarchies-network-2"></div>
+      <div id="hierarchies-network-4"></div>
+      <div id="hierarchies-network-5"></div>
+    </div>
+    <div id="hierarchies-modern-single">
+      <div id="hierarchies-network-7"></div>
+      <div id="hierarchies-network-8"></div>
+      <div id="hierarchies-network-9"></div>
+      <div id="hierarchies-network-6"></div>
+      <div id="hierarchies-network-14"></div>
+      <div id="hierarchies-network-15"></div>
+      <div id="hierarchies-network-16"></div>
+    </div>
+    <div id="hierarchies-abrahamic-single" style="display:none">
+      <div id="hierarchies-network-3"></div>
+      <div id="hierarchies-network-10"></div>
+      <div id="hierarchies-network-11"></div>
+    </div>
+    <div id="hierarchies-east-asian-single" style="display:none">
+      <div id="hierarchies-network-12"></div>
+      <div id="hierarchies-network-13"></div>
+    </div>
+
+  </div>
+
+  <div id="map-container">
+    <div id="map-year-control">
+      <span id="map-year-label">2000 г. до н.э.</span>
+      <input type="range" id="map-year-slider" min="-3000" max="2100" value="2100" step="1">
+      <span id="map-year-value">2025</span>
+      <div id="map-play-control">
+        <button id="map-play-btn">▶</button>
+      </div>
+    </div>
+    <div id="map"></div>
+    <div id="map-legend"></div>
+  </div>
+
+  <div id="info-panel">
+    <button class="close-btn" onclick="closeInfo()">&times;</button>
+    <h3 id="node-title"></h3>
+    <div class="category" id="node-category"></div>
+    <div class="date" id="node-date"></div>
+    <div class="description" id="node-description"></div>
+    <div class="rules-title" id="rules-title" style="display:none">Правила / Предписания</div>
+    <ul class="rules-list" id="rules-list"></ul>
+    <div class="links-title" id="links-title" style="display:none">Источники</div>
+    <ul class="links-list" id="links-list"></ul>
+    <button id="btn-detail" class="detail-btn" style="display:none">Подробнее →</button>
+  </div>
+  </div>
+
+  <div id="detail-panel">
+    <div id="detail-box">
+      <button class="close-btn" onclick="closeDetail()">&times;</button>
+      <h3 id="detail-title"></h3>
+      <div class="detail-content" id="detail-content"></div>
+    </div>
+  </div>
+
+  <script src="https://unpkg.com/vis-network@9.1.9/standalone/umd/vis-network.min.js"></script>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="js/data.js?v=3"></script>
+  <script src="js/map-data.js?v=3"></script>
+  <script src="js/app.js?v=3"></script>
+</body>
+</html>
