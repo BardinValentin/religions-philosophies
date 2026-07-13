@@ -323,11 +323,18 @@ network.on('dragEnd', function () {
   dragCtx = null;
 });
 
-// Restore saved positions on load
-(function applySaved() {
+// Restore saved positions on load (fallback: default_positions.json)
+(async function applySaved() {
   try {
-    const saved = JSON.parse(localStorage.getItem('religion_positions'));
-    if (!saved) return;
+    let raw = localStorage.getItem('religion_positions');
+    if (!raw) {
+      try {
+        const r = await fetch('js/default_positions.json');
+        if (r.ok) raw = JSON.stringify(await r.json());
+      } catch(e2) { /* no default file */ }
+    }
+    if (!raw) return;
+    const saved = JSON.parse(raw);
     let count = 0;
     Object.keys(saved).forEach(id => {
       const node = network.body.nodes[id];
